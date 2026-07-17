@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vakin Leads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0a09;
+            --bg2: #1a1714;
+            --card: #1c1917;
+            --card-hover: #211f1b;
+            --border: #3d3529;
+            --border-glow: #c9a84c33;
+            --text: #faf9f6;
+            --text-secondary: #e8e4dc;
+            --muted: #a89f91;
+            --gold: #d4a843;
+            --gold-light: #e8c96a;
+            --gold-dark: #b8922e;
+            --gold-bg: rgba(212, 168, 67, 0.08);
+            --gold-bg-hover: rgba(212, 168, 67, 0.14);
+            --accent2: #6ec89b;
+            --accent2-bg: rgba(110, 200, 155, 0.12);
+            --danger: #e05555;
+            --danger-bg: rgba(224, 85, 85, 0.12);
+            --amber: #e5a63b;
+            --amber-bg: rgba(229, 166, 59, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, Segoe UI, Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 40px;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 168, 67, 0.06), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(212, 168, 67, 0.03), transparent);
+        }
+
+        .header {
+            margin-bottom: 32px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0c0a09;
+            box-shadow: 0 2px 12px rgba(212, 168, 67, 0.25);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.3px;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 22px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 20px rgba(212, 168, 67, 0.04);
+        }
+
+        .card h2 {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 14px 0;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h2 .icon {
+            color: var(--gold);
+            font-size: 15px;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 10px;
+            line-height: 1.5;
+            padding: 8px 10px;
+            background: var(--gold-bg);
+            border-radius: 6px;
+            border-left: 2px solid var(--gold-dark);
+        }
+
+        label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 4px;
+            margin-top: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 9px 12px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 13px;
+            font-family: inherit;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--gold-dark);
+            box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.1);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #5c554a;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        button {
+            margin-top: 14px;
+            padding: 9px 18px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #0c0a09;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: transform 0.1s, box-shadow 0.15s;
+            box-shadow: 0 2px 8px rgba(212, 168, 67, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(212, 168, 67, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.secondary {
+            background: var(--bg2);
+            color: var(--muted);
+            border: 1px solid var(--border);
+            box-shadow: none;
+        }
+
+        button.secondary:hover {
+            color: var(--text);
+            border-color: var(--gold-dark);
+            box-shadow: none;
+        }
+
+        button.danger {
+            background: var(--danger-bg);
+            color: var(--danger);
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 500;
+            margin: 0;
+            box-shadow: none;
+            border: 1px solid rgba(224, 85, 85, 0.2);
+        }
+
+        button.danger:hover {
+            background: rgba(224, 85, 85, 0.2);
+            box-shadow: none;
+        }
+
+        .status {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 10px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+        }
+
+        tr:hover td {
+            background: var(--bg2);
+        }
+
+        a {
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .badge.success {
+            background: var(--accent2-bg);
+            color: var(--accent2);
+        }
+
+        .badge.partial {
+            background: var(--amber-bg);
+            color: var(--amber);
+        }
+
+        .badge.failed {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
+
+        .badge.no_website {
+            background: rgba(168, 159, 145, 0.1);
+            color: var(--muted);
+        }
+
+        .schedule-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="brand">
+            <div class="brand-icon">V</div>
+            <h1><span>Vakin</span> Leads</h1>
+        </div>
+        <div class="subtitle">Scrape, enrich, schedule, and send — all in one place.</div>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2><span class="icon">⚡</span> Run a Scrape Now</h2>
+            <label>Business Type</label>
+            <input id="scrapeType" placeholder="e.g. dentist, law firm, restaurant">
+            <label>Location</label>
+            <input id="scrapeLocation" placeholder="e.g. Dubai, New York">
+            <label>Max Results</label>
+            <input id="scrapeMax" type="number" value="20">
+            <button onclick="triggerScrape()">Run Scrape</button>
+            <div class="status" id="scrapeStatus"></div>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">🔁</span> Schedule Recurring Scrape</h2>
+            <label>Job Name</label>
+            <input id="schedName" placeholder="e.g. dubai_clinics_weekly">
+            <label>Business Type</label>
+            <input id="schedType" placeholder="e.g. clinic">
+            <label>Location</label>
+            <input id="schedLocation" placeholder="e.g. Dubai">
+            <label>Max Results</label>
+            <input id="schedMax" type="number" value="50">
+            <div class="row-3">
+                <div><label>Hour (0-23, UTC)</label><input id="schedHour" type="number" value="9"></div>
+                <div><label>Minute</label><input id="schedMinute" type="number" value="0"></div>
+                <div><label>Day</label>
+                    <select id="schedDay">
+                        <option value="*">Every day</option>
+                        <option value="mon">Monday</option>
+                        <option value="tue">Tuesday</option>
+                        <option value="wed">Wednesday</option>
+                        <option value="thu">Thursday</option>
+                        <option value="fri">Friday</option>
+                    </select>
+                </div>
+            </div>
+            <button onclick="scheduleScrape()">Schedule It</button>
+            <div class="status" id="schedScrapeStatus"></div>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">📧</span> Schedule Email Campaign</h2>
+            <label>Job Name</label>
+            <input id="emailSchedName" placeholder="e.g. weekly_dubai_outreach">
+            <label>Subject</label>
+            <input id="emailSubject" placeholder="Quick note for {business_name}">
+            <label>Body (use {business_name} for personalization)</label>
+            <textarea id="emailBody" placeholder="Hi {business_name} team,&#10;&#10;..."></textarea>
+            <div class="row-3">
+                <div><label>Hour (0-23, UTC)</label><input id="emailHour" type="number" value="10"></div>
+                <div><label>Minute</label><input id="emailMinute" type="number" value="0"></div>
+                <div><label>Day</label>
+                    <select id="emailDay">
+                        <option value="*">Every day</option>
+                        <option value="mon">Monday</option>
+                        <option value="tue">Tuesday</option>
+                        <option value="wed">Wednesday</option>
+                        <option value="thu">Thursday</option>
+                        <option value="fri">Friday</option>
+                    </select>
+                </div>
+            </div>
+            <button onclick="scheduleEmail()">Schedule It</button>
+            <div class="status" id="schedEmailStatus"></div>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">🚀</span> Send Email Campaign Now</h2>
+            <div class="hint">
+                Leave blank to use the default personalized outreach template for each lead.
+            </div>
+            <label>Subject (optional override)</label>
+            <input id="nowSubject" placeholder="Leave blank for default">
+            <label>Body (optional override)</label>
+            <textarea id="nowBody" placeholder="Leave blank for default"></textarea>
+            <label>Delay Between Sends (seconds)</label>
+            <input id="nowDelay" type="number" value="10">
+            <div class="btn-group">
+                <button onclick="previewCampaign()" class="secondary">Preview Recipients</button>
+                <button onclick="sendCampaignNow()">Send Now</button>
+            </div>
+            <div class="status" id="nowStatus"></div>
+        </div>
+
+        <div class="card full-width">
+            <h2><span class="icon">📋</span> Active Schedules
+                <button class="secondary" style="margin-left:auto; padding:5px 12px; font-size:11px;"
+                    onclick="loadSchedules()">Refresh</button>
+            </h2>
+            <div id="schedulesList" style="font-size:13px; color: var(--muted);">Loading...</div>
+        </div>
+
+        <div class="card full-width">
+            <h2><span class="icon">📊</span> Scraped Leads
+                <button class="secondary" style="margin-left:auto; padding:5px 12px; font-size:11px;"
+                    onclick="loadLeads()">Refresh</button>
+            </h2>
+            <div id="leadsTable">Click Refresh to load data.</div>
+        </div>
+
+    </div>
+
+    <script>
+        const API = "";
+
+        async function triggerScrape() {
+            const body = {
+                business_type: document.getElementById("scrapeType").value,
+                location: document.getElementById("scrapeLocation").value,
+                max_results: parseInt(document.getElementById("scrapeMax").value),
+            };
+            const statusEl = document.getElementById("scrapeStatus");
+            statusEl.textContent = "Queuing...";
+            const res = await fetch(`${API}/scrape/`, {
+                method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+            });
+            const data = await res.json();
+            statusEl.textContent = `Queued! Task ID: ${data.task_id}\nChecking status...`;
+            pollStatus(data.task_id, statusEl);
+        }
+
+        async function pollStatus(taskId, statusEl) {
+            const res = await fetch(`${API}/scrape/status/${taskId}`);
+            const data = await res.json();
+            if (data.status === "SUCCESS") {
+                statusEl.textContent = `Done!\n${JSON.stringify(data.result, null, 2)}`;
+                loadLeads();
+            } else if (data.status === "FAILURE") {
+                statusEl.textContent = `Failed.\n${JSON.stringify(data.result)}`;
+            } else {
+                statusEl.textContent = `Status: ${data.status}...`;
+                setTimeout(() => pollStatus(taskId, statusEl), 3000);
+            }
+        }
+
+        async function scheduleScrape() {
+            const body = {
+                job_name: document.getElementById("schedName").value,
+                business_type: document.getElementById("schedType").value,
+                location: document.getElementById("schedLocation").value,
+                max_results: parseInt(document.getElementById("schedMax").value),
+                hour: parseInt(document.getElementById("schedHour").value),
+                minute: parseInt(document.getElementById("schedMinute").value),
+                day_of_week: document.getElementById("schedDay").value,
+            };
+            const res = await fetch(`${API}/schedules/scrape`, {
+                method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+            });
+            const data = await res.json();
+            document.getElementById("schedScrapeStatus").textContent = JSON.stringify(data);
+            loadSchedules();
+        }
+
+        async function scheduleEmail() {
+            const body = {
+                job_name: document.getElementById("emailSchedName").value,
+                subject: document.getElementById("emailSubject").value,
+                body_template: document.getElementById("emailBody").value,
+                hour: parseInt(document.getElementById("emailHour").value),
+                minute: parseInt(document.getElementById("emailMinute").value),
+                day_of_week: document.getElementById("emailDay").value,
+            };
+            const res = await fetch(`${API}/schedules/email`, {
+                method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+            });
+            const data = await res.json();
+            document.getElementById("schedEmailStatus").textContent = JSON.stringify(data);
+            loadSchedules();
+        }
+
+        async function sendCampaignNow() {
+            const subjectVal = document.getElementById("nowSubject").value.trim();
+            const bodyVal = document.getElementById("nowBody").value.trim();
+            const body = {
+                subject: subjectVal || null,
+                body_template: bodyVal || null,
+                delay_seconds_between: parseInt(document.getElementById("nowDelay").value),
+            };
+            const statusEl = document.getElementById("nowStatus");
+            statusEl.textContent = "Queuing campaign...";
+            try {
+                const res = await fetch(`${API}/email/campaign`, {
+                    method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)
+                });
+                if (!res.ok) {
+                    const errText = await res.text();
+                    statusEl.textContent = `Error ${res.status}: ${errText}`;
+                    return;
+                }
+                const data = await res.json();
+                statusEl.textContent = `Queued! Task ID: ${data.task_id}\nCheck the worker terminal for progress.`;
+            } catch (err) {
+                statusEl.textContent = `Request failed: ${err.message}`;
+            }
+        }
+
+        async function previewCampaign() {
+            const statusEl = document.getElementById("nowStatus");
+            statusEl.textContent = "Loading preview...";
+            try {
+                const res = await fetch(`${API}/email/preview`);
+                const data = await res.json();
+                if (data.count === 0) {
+                    statusEl.textContent = "No leads ready for email (email_status must be 'not_sent' with a valid email).";
+                    return;
+                }
+                let preview = `${data.count} recipient(s) ready:\n\n`;
+                data.recipients.forEach((r, i) => {
+                    preview += `${i + 1}. ${r.business_name} → ${r.email}\n`;
+                });
+                statusEl.textContent = preview;
+            } catch (e) {
+                statusEl.textContent = `Preview failed: ${e.message}`;
+            }
+        }
+
+        async function loadSchedules() {
+            const res = await fetch(`${API}/schedules/`);
+            const data = await res.json();
+            const el = document.getElementById("schedulesList");
+            if (!data.schedules || data.schedules.length === 0) {
+                el.innerHTML = "No active schedules.";
+                return;
+            }
+            el.innerHTML = data.schedules.map(key => {
+                const parts = key.replace("redbeat:", "").split(":");
+                const jobType = parts[0], jobName = parts[1];
+                return `<div class="schedule-row">
+      <span>${key}</span>
+      <button class="danger" onclick="deleteSchedule('${jobType}','${jobName}')">Remove</button>
+    </div>`;
+            }).join("");
+        }
+
+        async function deleteSchedule(jobType, jobName) {
+            await fetch(`${API}/schedules/${jobType}/${jobName}`, { method: "DELETE" });
+            loadSchedules();
+        }
+
+        function statusBadge(status) {
+            return `<span class="badge ${status}">${status}</span>`;
+        }
+
+        async function loadLeads() {
+            const res = await fetch(`${API}/scrape/leads?limit=100`);
+            const data = await res.json();
+            const el = document.getElementById("leadsTable");
+            if (!data.leads || data.leads.length === 0) {
+                el.innerHTML = "No leads yet.";
+                return;
+            }
+            const rows = data.leads.map(l => `
+    <tr>
+      <td>${l.business_name || ""}</td>
+      <td>${l.category || ""}</td>
+      <td>${l.website ? `<a href="${l.website}" target="_blank">link</a>` : ""}</td>
+      <td>${l.phone_primary || ""}</td>
+      <td>${l.email_primary || ""}</td>
+      <td>${l.social_linkedin ? `<a href="${l.social_linkedin}" target="_blank">LinkedIn</a>` : ""}</td>
+      <td>${statusBadge(l.enrichment_status || "")}</td>
+      <td>${l.email_status || ""}</td>
+    </tr>
+  `).join("");
+            el.innerHTML = `<table>
+    <tr><th>Business</th><th>Category</th><th>Website</th><th>Phone</th><th>Email</th><th>Social</th><th>Enrichment</th><th>Email Status</th></tr>
+    ${rows}
+  </table>`;
+        }
+
+        loadSchedules();
+    </script>
+</body>
+
+</html>
